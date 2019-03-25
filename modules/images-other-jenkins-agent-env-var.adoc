@@ -1,0 +1,57 @@
+// Module included in the following assemblies:
+//
+// * images/using_images/images-other-jenkins-agent.adoc
+
+[id="images-other-jenkins-agent-env-var_{context}"]
+= Jenkins agent environment variables
+
+Each Jenkins agent container can be configured with the following environment
+variables.
+
+[options="header"]
+|===
+| Variable | Definition
+
+|`JAVA_MAX_HEAP_PARAM`,
+`CONTAINER_HEAP_PERCENT` (default: `0.5`, or 50%),
+`JENKINS_MAX_HEAP_UPPER_BOUND_MB`
+|These values control the maximum heap size of the Jenkins JVM. If
+`JAVA_MAX_HEAP_PARAM` is set (example setting: `-Xmx512m`), its value takes
+precedence. Otherwise, the maximum heap size is dynamically calculated as
+`CONTAINER_HEAP_PERCENT`% (example setting: `0.5`, or 50%) of the container
+memory limit, optionally capped at `JENKINS_MAX_HEAP_UPPER_BOUND_MB` MiB
+(example setting: `512`).
+
+By default, the maximum heap size of the Jenkins JVM is set to 50% of the
+container memory limit with no cap.
+
+|`JAVA_INITIAL_HEAP_PARAM`,
+`CONTAINER_INITIAL_PERCENT`
+|These values control the initial heap size of the Jenkins JVM. If
+`JAVA_INITIAL_HEAP_PARAM` is set (example setting: `-Xms32m`), its value takes
+precedence. Otherwise, the initial heap size may be dynamically calculated as
+`CONTAINER_INITIAL_PERCENT`% (example setting: `0.1`, or 10%) of the
+dynamically calculated maximum heap size.
+
+By default, the initial heap sizing is left to the JVM.
+
+|`CONTAINER_CORE_LIMIT`
+|If set, specifies an integer number of cores used for sizing numbers of internal
+JVM threads. Example setting: `2`.
+
+|`JAVA_TOOL_OPTIONS` (default: `-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dsun.zip.disableMemoryMapping=true`)
+|Specifies options to be heeded by all JVMs running in this container. It is not
+recommended to override this.
+
+|`JAVA_GC_OPTS` (default: `-XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90`)
+|Specifies Jenkins JVM garbage collection parameters. It is not recommended to
+override this.
+
+|`JENKINS_JAVA_OVERRIDES`
+|Specifies additional options for the Jenkins JVM. These options are appended to
+all other options, including the Java options above, and may be used to override
+any of them if necessary. Separate each additional option with a space; if any
+option contains space characters, escape them with a backslash. Example
+settings: `-Dfoo -Dbar`; `-Dfoo=first\ value -Dbar=second\ value`.
+
+|===

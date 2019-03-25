@@ -1,0 +1,116 @@
+// Module included in the following assemblies:
+//
+// * images/using_images/images-other-jenkins.adoc
+
+[id="images-other-jenkins-env-var_{context}"]
+= Jenkins environment variables
+
+The Jenkins server can be configured with the following environment variables:
+
+[options="header"]
+|===
+| Variable | Definition
+
+|`OPENSHIFT_ENABLE_OAUTH` (default: `false`)
+|Determines whether the OpenShift Login plug-in manages authentication when
+logging into Jenkins. To enable, set to `true`.
+
+|`JENKINS_PASSWORD` (default: `password`)
+|The password for the `admin` user when using standard Jenkins authentication.
+Not applicable when `OPENSHIFT_ENABLE_OAUTH` is set to `true`.
+
+|`JAVA_MAX_HEAP_PARAM`,
+`CONTAINER_HEAP_PERCENT` (default: `0.5`, or 50%),
+`JENKINS_MAX_HEAP_UPPER_BOUND_MB`
+|These values control the maximum heap size of the Jenkins JVM. If
+`JAVA_MAX_HEAP_PARAM` is set (example setting: `-Xmx512m`), its value takes
+precedence. Otherwise, the maximum heap size is dynamically calculated as
+`CONTAINER_HEAP_PERCENT`% (example setting: `0.5`, or 50%) of the container
+memory limit, optionally capped at `JENKINS_MAX_HEAP_UPPER_BOUND_MB` MiB
+(example setting: `512`).
+
+By default, the maximum heap size of the Jenkins JVM is set to 50% of the
+container memory limit with no cap.
+
+|`JAVA_INITIAL_HEAP_PARAM`,
+`CONTAINER_INITIAL_PERCENT`
+|These values control the initial heap size of the Jenkins JVM. If
+`JAVA_INITIAL_HEAP_PARAM` is set (example setting: `-Xms32m`), its value takes
+precedence. Otherwise, the initial heap size may be dynamically calculated as
+`CONTAINER_INITIAL_PERCENT`% (example setting: `0.1`, or 10%) of the
+dynamically calculated maximum heap size.
+
+By default, the initial heap sizing is left to the JVM.
+
+|`CONTAINER_CORE_LIMIT`
+|If set, specifies an integer number of cores used for sizing numbers of internal
+JVM threads. Example setting: `2`.
+
+|`JAVA_TOOL_OPTIONS` (default: `-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dsun.zip.disableMemoryMapping=true`)
+|Specifies options to be heeded by all JVMs running in this container. It is not
+recommended to override this.
+
+|`JAVA_GC_OPTS` (default: `-XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90`)
+|Specifies Jenkins JVM garbage collection parameters. It is not recommended to
+override this.
+
+|`JENKINS_JAVA_OVERRIDES`
+|Specifies additional options for the Jenkins JVM. These options are appended to
+all other options, including the Java options above, and may be used to override
+any of them if necessary. Separate each additional option with a space; if any
+option contains space characters, escape them with a backslash. Example
+settings: `-Dfoo -Dbar`; `-Dfoo=first\ value -Dbar=second\ value`.
+
+|`JENKINS_OPTS`
+|Specifies arguments to Jenkins.
+
+|`INSTALL_PLUGINS`
+|Specifies additional Jenkins plug-ins to install when the container is first run
+or when `OVERRIDE_PV_PLUGINS_WITH_IMAGE_PLUGINS` is set to `true` (see below).
+Plug-ins are specified as a comma-delimited list of name:version pairs. Example
+setting: `git:3.7.0,subversion:2.10.2`.
+
+|`OPENSHIFT_PERMISSIONS_POLL_INTERVAL` (default: `300000` - 5 minutes)
+|Specifies in milliseconds how often the OpenShift Login plug-in polls
+{product-title} for the permissions associated with each user defined in Jenkins.
+
+|`OVERRIDE_PV_CONFIG_WITH_IMAGE_CONFIG` (default: `false`)
+|When running this image with an {product-title} persistent volume for the Jenkins
+config directory, the transfer of configuration from the image to the persistent
+volume is only done the first startup of the image as the persistent volume is
+assigned by the persistent volume claim creation. If you create a custom image
+that extends this image and updates configuration in the custom image after
+the initial startup, by default it is not copied over, unless you set this
+environment variable to `true`.
+
+|`OVERRIDE_PV_PLUGINS_WITH_IMAGE_PLUGINS` (default: `false`)
+|When running this image with an {product-title} persistent volume for the Jenkins
+config directory, the transfer of plugins from the image to the persistent
+volume is only done the first startup of the image as the persistent volume is
+assigned by the persistent volume claim creation. If you create a custom image
+that extends this image and updates plugins in the custom image after
+the initial startup, by default they are not copied over, unless you set this
+environment variable to `true`.
+
+|`ENABLE_FATAL_ERROR_LOG_FILE` (default: `false`)
+|When running this image with an {product-title} persistent claim for the Jenkins
+config directory, this environment variable allows the fatal error log file to
+persist when a fatal error occurs. The fatal error file is saved at
+`/var/lib/jenkins/logs`.
+
+|`NODEJS_SLAVE_IMAGE`
+|Setting this value overrides the image used for the default NodeJS agent pod
+configuration. The default NodeJS agent image in Jenkins server is
+`image-registry.openshift-image-registry.svc:5000/openshift/jenkins-agent-nodejs:latest`.
+There is a related imagestreamtag named `jenkins-agent-nodejs` in the OpenShift
+project. This variable must be set before Jenkins starts
+the first time for it to have an effect.
+
+|`MAVEN_SLAVE_IMAGE`
+|Setting this value overrides the image used for the default maven agent pod configuration.
+The default maven agent image in Jenkins server is
+`image-registry.openshift-image-registry.svc:5000/openshift/jenkins-agent-maven:latest`.
+There is a related imagestreamtag named `jenkins-agent-maven` in the OpenShift
+project.This variable must be set before Jenkins starts
+the first time for it to have an effect.
+|===

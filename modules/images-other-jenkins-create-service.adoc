@@ -1,0 +1,51 @@
+// Module included in the following assemblies:
+//
+// * images/using_images/images-other-jenkins.adoc
+
+[id="images-other-jenkins-create-service_{context}"]
+= Creating a Jenkins service from a template
+
+Templates provide parameter fields to define all the environment variables
+(password) with predefined defaults. {product-title} provides templates to make
+creating a new Jenkins service easy. The Jenkins templates should be
+registered in the default `openshift` project by your cluster administrator
+during the initial cluster setup.
+
+The two available templates both define deployment configuration and a service.
+The templates differ in their storage strategy, which affects whether or not the
+Jenkins content persists across a pod restart.
+
+[NOTE]
+====
+A pod may be restarted when it is moved to another node, or when an update of
+the deployment configuration triggers a redeployment.
+====
+
+* `jenkins-ephemeral` uses ephemeral storage. On pod restart, all data is lost.
+This template is useful for development or testing only.
+
+* `jenkins-persistent` uses a persistent volume store. Data survives a pod
+restart.
+
+To use a persistent volume store, the cluster administrator must define a
+persistent volume pool in the {product-title} deployment.
+
+Once you have selected which template you want, you must instantiate the
+template to be able to use Jenkins.
+
+.Procedure
+
+. Ensure the default imagestreams and templates are already installed.
+
+. Create a new Jenkins application using:
+.. A persistent volume:
++
+----
+$ oc new-app jenkins-persistent
+----
+
+.. Or an `emptyDir` type volume (where configuration does not persist across pod restarts):
++
+----
+$ oc new-app jenkins-ephemeral
+----

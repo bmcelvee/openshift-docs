@@ -1,0 +1,24 @@
+// Module included in the following assemblies:
+//
+// * images/using_images/images-other-jenkins.adoc
+
+[id="images-other-jenkins-memory_{context}"]
+= Jenkins memory requirements
+
+When deployed by the provided Jenkins Ephemeral or Jenkins Persistent
+templates, the default memory limit is 512MiB.
+
+By default all other processes executed in the Jenkins
+container, such as shell scripts or `oc` commands run locally from pipelines, are
+not likely to be able to use more than the remaining 256MiB memory combined
+without provoking an OOM kill. It is therefore highly recommended that
+pipelines run external commands in a agent container wherever possible.
+
+It is recommended to specify memory request and limit values on agent containers
+created by the Jenkins Kubernetes Plug-in. As admin, defaults can be set on a
+per-agent image basis through the Jenkins configuration. The memory request
+and limit can also be overridden on a per-container basis.
+
+You can increase the amount of memory available to Jenkins by overriding
+the `MEMORY_LIMIT` parameter when instantiating the Jenkins Ephemeral or
+Jenkins Persistent template.

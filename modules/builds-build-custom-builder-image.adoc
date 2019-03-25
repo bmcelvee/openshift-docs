@@ -29,5 +29,5 @@ $ oc start-build custom-builder-image --from-dir . -F
 ----
 +
 After the build completes, your new custom builder image will be
-available in your project in an imagestream tag named
+available in your project in an imagestreamtag named
 `custom-builder-image:latest`.
