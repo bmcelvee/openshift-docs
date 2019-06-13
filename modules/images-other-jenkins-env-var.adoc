@@ -120,7 +120,7 @@ uses an invalid SSL certificate. This could be the case if a self hosted reposit
 using self-signed certificate with an unknow CA is used or if an enteprise proxy  
 performs man-in-the-middle interceptions. This variable applies to plugins downloads which may 
 occur during Jenkins image build or if an extension of the Jenkins image is built or if you 
-run the jenkins image and leverage one of the options to download additional plugins 
-(use of s2i whith plugins.txt or use of `INSTALL_PLUGINS` environment variable.
+run the Jenkins image and leverage one of the options to download additional plugins 
+(use of s2i whith plugins.txt or use of `INSTALL_PLUGINS` environment variable).
 To enable, set to `true`.
 |===
