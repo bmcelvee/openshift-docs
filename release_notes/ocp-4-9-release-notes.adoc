@@ -202,6 +202,12 @@ For more information, see xref:../authentication/managing_cloud_provider_credent
 
 // Note: use [discrete] for these sub-headings.
 
+[discrete]
+[id="ocp-4-9-coreDNS-version-update"]
+=== CoreDNS update to version 1.8.4
+
+In {product-title} 4.9, CoreDNS uses version 1.8.4, which includes bug fixes.
+
 [id="ocp-4-9-deprecated-removed-features"]
 == Deprecated and removed features
 
