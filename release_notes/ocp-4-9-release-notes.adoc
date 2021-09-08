@@ -208,6 +208,12 @@ For more information, see xref:../authentication/managing_cloud_provider_credent
 
 In {product-title} 4.9, CoreDNS uses version 1.8.4, which includes bug fixes.
 
+[discrete]
+[id="ocp-4-8-haproxy-2.2.15-upgrade"]
+=== Ingress Controller upgraded to HAProxy 2.2.15
+
+The {product-title} Ingress Controller is upgraded to HAProxy version 2.2.15.
+
 [id="ocp-4-9-deprecated-removed-features"]
 == Deprecated and removed features
 
