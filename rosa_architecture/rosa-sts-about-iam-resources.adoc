@@ -26,6 +26,13 @@ ifdef::openshift-rosa-hcp[]
 endif::openshift-rosa-hcp[]
 you must create the following AWS Identity Access Management (IAM) resources:
 
+[TIP]
+====
+This page introduces unmanaged IAM resource information for {product-title} (ROSA) clusters that use the AWS Security Token Service (STS).
+====
+
+To deploy a {product-title} (ROSA) cluster that uses the AWS Security Token Service (STS), you must create the following AWS Identity Access Management (IAM) resources:
+
 * Specific account-wide IAM roles and policies that provide the STS permissions required for ROSA support, installation,
 ifndef::openshift-rosa-hcp[]
 control plane,

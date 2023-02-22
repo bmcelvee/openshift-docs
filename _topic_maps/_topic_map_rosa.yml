@@ -78,6 +78,9 @@ Topics:
 #   File: rosa-admission-plug-ins
 #   Distros: openshift-rosa
 - Name: About IAM resources for STS clusters
+- Name: About managed IAM resources for ROSA with STS
+  File: rosa-sts-about-iam-resources-managed
+- Name: About unmanaged IAM resources for ROSA with STS
   File: rosa-sts-about-iam-resources
 - Name: OpenID Connect Overview
   File: rosa-oidc-overview
