@@ -18,4 +18,4 @@ To change your FedRAMP password:
 
 . Navigate to https://api.openshiftusgov.com/auth.
 . Click *Forgot your password?* under the password field.
-. Follow the steps to change your password
+. Follow the steps to change your password.

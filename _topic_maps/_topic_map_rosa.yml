@@ -113,15 +113,6 @@ Topics:
 - Name: Using the Node Tuning Operator on ROSA with HCP
   File: rosa-tuning-config
 ---
-Name: Create ROSA GovCloud clusters
-Dir: rosa_govcloud
-Distros: openshift-rosa
-Topics:
-- Name: Creating ROSA AWS GovCloud Clusters
-  File: rosa-create-govcloud-cluster
-- Name: Managing your ROSA AWS GovCloud account
-  File: rosa-govcloud-account-management
----
 Name: Install ROSA Classic clusters
 Dir: rosa_install_access_delete_clusters
 Distros: openshift-rosa
@@ -172,6 +163,15 @@ Topics:
     File: rosa-deleting-cluster
   - Name: Command quick reference for creating clusters and users
     File: rosa-quickstart
+---
+Name: Accessing {product-title} (ROSA) in AWS GovCloud
+Dir: rosa_govcloud
+Distros: openshift-rosa
+Topics:
+- Name: Accessing {product-title} (ROSA) in AWS GovCloud
+  File: rosa-create-govcloud-cluster
+- Name: Managing your ROSA AWS GovCloud account
+  File: rosa-govcloud-account-management
 ---
 Name: ROSA CLI
 Dir: rosa_cli
